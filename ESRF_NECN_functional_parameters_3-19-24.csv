@@ -1,0 +1,6 @@
+FunctionalGroupName,FunctionalGroupIndex,TemperatureCurve1,TemperatureCurve2,TemperatureCurve3,TemperatureCurve4,FractionANPPtoLeaf,LeafBiomassToLAI,KLAI,MaximumLAI,MoistureCurve2,MoistureCurve3,WoodDecayRate,MonthlyWoodMortality,LongevityMortalityShape,FoliageDropMonth,CoarseRootFraction,FineRootFraction
+ConTrees,1,16,20.5,0.13,3,0.34,-0.8,5000,20,0.7,0.8,0.04,0.001,18,9,0.25,0.02
+DecBLTrees,2,22.5,29,0.5,2,0.55,-0.8,6000,10,0.7,0.94,0.05,0.001,13,9,0.2,0.02
+EvrBLTrees,3,20,40,0.6,6.4,0.2,-0.8,100,8,0.7,0.72,0.05,0.001,15,9,0.22,0.25
+DecShrub,4,22.5,29,0.5,2,0.7,-0.8,5000,8,0.7,0.87,0.05,0.001,15,9,0.2,0.9
+EvrShrub,5,18,45,0.9,6.4,0.7,-0.8,1000,8,0.7,0.67,0.04,0.001,15,9,0.2,0.9

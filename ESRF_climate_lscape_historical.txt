@@ -1,0 +1,16 @@
+LandisData "Climate Config"				
+		
+ClimateTimeSeries			Daily_RandomYears
+ClimateFile				ESRF_baseline_climate.csv
+ClimateFileFormat			Daily_Temp-C_Precip-mmDay
+
+SpinUpClimateTimeSeries		Daily_AverageAllYears
+SpinUpClimateFile		ESRF_baseline_climate.csv
+SpinUpClimateFileFormat		Daily_Temp-C_Precip-mmDay
+
+UsingFireClimate			yes
+FineFuelMoistureCode			85
+DuffMoistureCode			8
+DroughtCode				15
+FirstDayFire				30
+LastDayFire				320

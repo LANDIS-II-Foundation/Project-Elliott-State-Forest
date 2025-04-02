@@ -1,0 +1,407 @@
+LandisData  "Biomass Harvest"
+
+
+>>----------------
+>> REQUIRED INPUTS
+>>-----------------
+Timestep		1
+
+ManagementAreas 	ESRF_final_MA_map.tif
+
+Stands     		ESRF_final_stand_map.tif
+
+
+
+>> -------------------------
+>> HARVESTING PRESCRIPTIONS
+>> -------------------------
+
+>>--------------------------- INTENSIVE TREATMENTS ---------------------------
+
+>>---- PRESCRIPTION_INTENSIVE-CLEARCUT ---------------------------------------
+Prescription 		Intensive_clearcut
+    StandRanking 	RegulateAges															
+	MinimumAge	60																		
+	MaximumAge	120
+	StandAdjacency	4
+	AdjacencyType	StandAge																<<Prevents creation of adjacent patches in adjacent stands. May be too conservative for TRIAD-E sub-watersheds.
+    SiteSelection 	PatchCutting		100%		48		PatchSize						<<OFPA limits harvest size to 120 acres (48.5 ha), so we have used patch cutting, but in reality, all stands designated for intensive management are < 48 ha in area
+    CohortsRemoved 	ClearCut
+	Plant			PSME
+
+
+>>---- PRESCRIPTION_INTENSIVE-THIN ---------------------------------------
+Prescription 		Intensive_thinning
+    StandRanking 	RegulateAges															
+	MinimumAge		35																		
+	MaximumAge		50
+	MinimumTimeSinceLastHarvest		35
+    SiteSelection 	Complete
+	CohortsRemoved	SpeciesList
+		>>Species 	Selection
+		>>-------	---------
+		PSME		1-34 (100%) 35-50 (30%)													<<Increase biomass reduction from the prior version (20 %)
+		TSHE		1-34 (100%) 35-50 (30%)
+		THPL		1-34 (100%) 35-50 (30%)
+		PISI		1-34 (100%) 35-50 (30%)
+		CHLA		1-34 (100%) 35-50 (30%)
+		ACMA		All
+		ALRU		All
+		ARME		All
+		CHCH		All
+		PREM		All
+		UMCA		All
+		ACCI		All
+		COCO		All
+		FRPU		All
+		GASH		All
+		HODI		All
+		MANE		All
+		RHMA		All
+		RUSP		All
+		VAOV		All
+
+>>--------------------------- EXTENSIVE TREATMENTS ---------------------------
+
+>>---- PRESCRIPTION_EXTENSIVE-LOW_AGG ---------------------------------------
+Prescription    	Extensive_regen_harv_low_rtn_agg
+    StandRanking    RegulateAges															
+	MinimumAge		100																<<Min threshold not mentioned in Ch. 5 ESRF proposal
+	MaximumAge		150																<<Screen out stands meeting OG criteria for this landscape
+	StandAdjacency	4
+	AdjacencyType	StandAge														<<Prevents creation of adjacent patches in adjacent stands.
+    MinimumTimeSinceLastHarvest		40												<<Reduces likelihood of the model trying to harvest stands again shortly after harvest in situations where the residuals from the previous harvest qualify the stand based on min/max age. Reduced from prior version in efforts to increase proportion of agg to dispersed retention.
+	SiteSelection 	PatchCutting	75%		5		AllowOverlap					<<Aiming for aggregated retention between adjacent patches within the stand. 75 % rather than 80 % cutting, modified from the prior version.
+    CohortsRemoved	SpeciesList
+		>>Species 	Selection														<<No trees originating before 1868 (152 years) harvested						
+		>>-------	---------
+		PSME		35-150 (98%)
+		TSHE		35-60 (95%)														<<modified from the prior version to reduce harvest volume
+		THPL		35-60 (95%)
+		PISI		35-60 (95%)		
+		CHLA		35-60 (95%)
+		ACMA		35-60 (95%)
+		ALRU		35-60 (95%)
+		ARME		35-60 (95%)
+		CHCH		35-60 (95%)
+		PREM		35-60 (95%)
+		UMCA		35-60 (95%)
+		ACCI		1-250 (50%)														<<modified from the prior version to mimic harvest damage to all shrub species.
+		COCO		1-250 (50%)
+		FRPU		1-250 (50%)
+		GASH		1-200 (50%)
+		HODI		1-30 (50%)
+		MANE		1-250 (50%)
+		RHMA		1-60 (50%)
+		RUSP		1-100 (50%)
+		VAOV		1-250 (50%)
+	
+	Plant	THPL CHLA ARME CHCH														<<Planting minor species of interest following some (but not all) regen harvests, per conversation with Matt Powers
+
+
+>>---- PRESCRIPTION_EXTENSIVE-LOW_DISP ---------------------------------------
+Prescription    	Extensive_regen_harv_low_rtn_disp
+    StandRanking    RegulateAges																
+	MinimumAge		100																<<Min threshold not mentioned in Ch. 5 ESRF proposal
+	MaximumAge		150																<<Screen out stands meeting OG criteria for this landscape
+	StandAdjacency	4
+	AdjacencyType	StandAge														<<Prevents creation of adjacent patches in adjacent stands.
+    MinimumTimeSinceLastHarvest		40												<<Reduces likelihood of the model trying to harvest stands again shortly after harvest in situations where the residuals from the previous harvest qualify the stand based on min/max age
+    SiteSelection 	PatchCutting	85%		5		AllowOverlap					<<NEW: change site selection to 90% of stand and increase removals in the harvested areas
+    CohortsRemoved	SpeciesList
+		>>Species 	Selection														<<No trees originating before 1868 (152 years) harvested, and no harvest of post-competitive exclusion non-PSME
+		>>-------	---------
+		PSME		1-99 (100%) 100-150 (95%)													<<All except desired minor species now at >90 % removal in order to reduce harvest biomass from the prior version
+		TSHE		1-99 (100%) 100-150 (95%)	
+		THPL		1-99 (95%) 100-150 (85%)
+		PISI		1-99 (100%) 100-150 (95%)
+		CHLA		1-99 (95%) 100-150 (85%)
+		ACMA		1-99 (100%) 100-150 (95%)
+		ALRU		1-99 (100%) 100-150 (95%)
+		ARME		1-99 (95%) 100-150 (85%)
+		CHCH		1-99 (95%) 100-150 (85%)
+		PREM		1-100 (20%)
+		UMCA		1-99 (100%) 100-150 (95%)
+		ACCI		1-250 (50%)														<<modified from the prior version to mimic harvest damage to all shrub species.
+		COCO		1-250 (50%)
+		FRPU		1-250 (50%)
+		GASH		1-200 (50%)
+		HODI		1-30 (50%)
+		MANE		1-250 (50%)
+		RHMA		1-60 (50%)
+		RUSP		1-100 (50%)
+		VAOV		1-250 (50%)
+		
+
+>>---- PRESCRIPTION_EXTENSIVE-MID_AGG ---------------------------------------
+Prescription    	Extensive_regen_harv_mid_rtn_agg
+    StandRanking    RegulateAges																	
+	MinimumAge		100																		<<Min threshold not mentioned in Ch. 5 ESRF proposal
+	MaximumAge		150																		<<Screen out stands meeting OG criteria for this landscape
+																							<<Harvest areas of insufficient size to require stand adjacency criteria
+	MinimumTimeSinceLastHarvest		40														<<Reduces likelihood of the model trying to harvest stands again shortly after harvest in situations where the residuals from the previous harvest qualify the stand based on min/max age. Reduced from prior version in efforts to increase proportion of agg to dispersed retention.
+    SiteSelection 	PatchCutting	50%		3.5			AllowOverlap						<<Average patch size from the 2-5 ha range that the ESRF extensive silviculture working group are proposing. AllowOverlap parameter should ensure some variability in patch size.
+    CohortsRemoved	SpeciesList
+		>>Species 	Selection																<<As with the dispersed retention (below), remove all but the old cohorts and advanced regeneration within patches
+		>>-------	---------
+		PSME		20-150 (100%)														
+		TSHE		20-150 (100%)																
+		THPL		20-150 (80%)															<<retain higher proportion of THPL, CHLA, ARME, CHCH as particularly desirable minor species.
+		PISI		20-150 (100%)
+		CHLA		20-150 (80%)
+		ACMA		20-150 (100%)
+		ALRU		20-150 (100%)	
+		ARME		20-150 (80%)								
+		CHCH		20-150 (80%)															
+		PREM		20-150 (20%)															<<retain these for wildlife habitat
+		UMCA		20-150 (90%)
+		ACCI		1-250 (50%)																<<modified from the prior version to mimic harvest damage to all shrub species.
+		COCO		1-250 (50%)
+		FRPU		1-250 (50%)
+		GASH		1-200 (50%)
+		HODI		1-30 (50%)
+		MANE		1-250 (50%)
+		RHMA		1-60 (50%)
+		RUSP		1-100 (50%)
+		VAOV		1-250 (50%)
+
+
+>>---- PRESCRIPTION_EXTENSIVE-MID_DISP ---------------------------------------
+Prescription    	Extensive_regen_harv_mid_rtn_disp
+    StandRanking    RegulateAges																	
+	MinimumAge		100																		<<Min threshold not mentioned in Ch. 5 ESRF proposal
+	MaximumAge		150																		<<Screen out stands meeting OG criteria for this landscape
+																							<<Harvest areas of insufficient size to require stand adjacency criteria
+	MinimumTimeSinceLastHarvest		40														<<Reduces likelihood of the model trying to harvest stands again shortly after harvest in situations where the residuals from the previous harvest qualify the stand based on min/max age. Reduced from prior version in efforts to increase proportion of agg to dispersed retention.
+    SiteSelection 	PatchCutting	50%		0.1			PercentCut							<<Aiming for aggregated retention between adjacent micro-patches (this is not operationally feasible but should have the desired ecological effect in the model). May need to adjust patch size
+    CohortsRemoved	SpeciesList
+		>>Species 	Selection																<<Remove all but the old cohorts and advanced regeneration
+		>>-------	---------
+		PSME		20-150 (100%)														
+		TSHE		20-150 (100%)																
+		THPL		20-150 (80%)															<<retain higher proportion of THPL, CHLA, ARME, CHCH as particularly desirable minor species.
+		PISI		20-150 (100%)
+		CHLA		20-150 (80%)
+		ACMA		20-150 (100%)
+		ALRU		20-150 (100%)	
+		ARME		20-150 (80%)								
+		CHCH		20-150 (80%)															
+		PREM		20-150 (20%)															<<retain these for wildlife habitat
+		UMCA		20-150 (90%)
+		ACCI		1-250 (50%)																<<modified from the prior version to mimic harvest damage to all shrub species.
+		COCO		1-250 (50%)
+		FRPU		1-250 (50%)
+		GASH		1-200 (50%)
+		HODI		1-30 (50%)
+		MANE		1-250 (50%)
+		RHMA		1-60 (50%)
+		RUSP		1-100 (50%)
+		VAOV		1-250 (50%)
+		
+	Plant	THPL CHLA ARME CHCH																<<Planting minor species of interest following some (but not all) regen harvests, per conversation with Matt Powers
+		
+		
+>>---- PRESCRIPTION_EXTENSIVE-HIGH_AGG ---------------------------------------				<<Note difference from prior versions; As per Matt Powers, 80 % retention level will only be aggregate-based
+Prescription    	Extensive_regen_harv_high_rtn_agg
+    StandRanking    RegulateAges															
+	MinimumAge		100																		<<Min threshold not mentioned in Ch. 5 ESRF proposal
+	MaximumAge		150																		<<Screen out stands meeting OG criteria for this landscape
+    MinimumTimeSinceLastHarvest		40														<<Reduced from prior version in efforts to increase proportion of agg to dispersed retention.
+	SiteSelection 	PatchCutting	25%		3.5		PatchSize								<<Marginally higher % harvest than the prior version. Patch size larger than most studies of gap effect on PSME in order to reliably create openings for regeneration and mimic operational treatment to the extent possible
+    CohortsRemoved	SpeciesList
+		>>Species 	Selection																<<leave advanced regeneration plus older trees in gaps plus a narrow age range of younger trees to supply seed and increase structural diversity while attempting to create genuine patches
+		>>-------	---------
+		PSME		10-49 (100%) 50-60 (60%) 100-150 (100%)									<<preferentially favor non-PSME species
+		TSHE		10-49 (100%) 50-60 (60%) 100-150 (100%)
+		THPL		10-150 (80%)															<<retain higher proportion of THPL, CHLA, ARME, CHCH as particularly desirable minor species.
+		PISI		10-99 (95%)  100-150 (90%)												<<higher leave proportion to compensate for lower seed dispersal distance		
+		CHLA		10-150 (80%)
+		ACMA		10-99 (95%)  100-150 (80%)												<<higher leave proportion to compensate for low seed dispersal distance								
+		ALRU		10-49 (100%) 50-60 (60%) 100-150 (100%)
+		ARME		10-150 (80%)
+		CHCH		10-150 (80%)
+		PREM		20-150 (20%)															<<retain for habitat value
+		UMCA		10-49 (100%) 50-60 (60%) 100-150 (100%)
+		ACCI		1-250 (50%)																<<modified from the prior version to mimic harvest damage to all shrub species.
+		COCO		1-250 (50%)
+		FRPU		1-250 (50%)
+		GASH		1-200 (50%)
+		HODI		1-30 (50%)
+		MANE		1-250 (50%)
+		RHMA		1-60 (50%)
+		RUSP		1-100 (50%)
+		VAOV		1-250 (50%)
+		
+	Plant	THPL CHLA ARME CHCH																<<Planting minor species of interest following some (but not all) regen harvests, per conversation with Matt Powers	
+
+>>---- PRESCRIPTION_EXTENSIVE-YOUNG_AGG_SMALL ---------------------------------------
+Prescription    	Extensive_young_stand_thin_agg_small
+    StandRanking    Random																	
+	MinimumAge		30																		<<Min threshold not mentioned in Ch. 5 ESRF proposal
+	MaximumAge		50																		<<No trees originating before 1868 harvested																				
+	SiteSelection 	PatchCutting	30%		0.1		PatchSize								<<Small gap creation.
+    CohortsRemoved	SpeciesList
+		>>Species 	Selection
+		>>-------	---------
+		PSME		1-150 (100%)
+		TSHE		1-150 (100%)
+		THPL		1-150 (100%)
+		PISI		1-150 (100%)
+		CHLA		1-150 (100%)
+		ACMA		1-150 (100%)
+		ALRU		1-150 (100%)
+		ARME		1-150 (100%)
+		CHCH		1-150 (100%)
+		PREM		1-150 (100%)
+		UMCA		1-150 (100%)
+		ACCI		1-250 (50%)																<<modified from the prior version to mimic harvest damage to all shrub species.
+		COCO		1-250 (50%)
+		FRPU		1-250 (50%)
+		GASH		1-200 (50%)
+		HODI		1-30 (50%)
+		MANE		1-250 (50%)
+		RHMA		1-60 (50%)
+		RUSP		1-100 (50%)
+		VAOV		1-250 (50%)		
+		
+		
+>>---- PRESCRIPTION_EXTENSIVE-YOUNG_AGG_MID ---------------------------------------
+Prescription    	Extensive_young_stand_thin_agg_mid
+    StandRanking    Random																	
+	MinimumAge		30																		<<Min threshold not mentioned in Ch. 5 ESRF proposal
+	MaximumAge		50																		<<No trees originating before 1868 harvested																				
+	SiteSelection 	PatchCutting	30%		0.25		PatchSize							<<Mid-size gap creation.
+    CohortsRemoved	SpeciesList
+		>>Species 	Selection
+		>>-------	---------
+		PSME		1-150 (100%)
+		TSHE		1-150 (100%)
+		THPL		1-150 (90%)																<<Lower removals from priority minor species + cherry (habitat value)
+		PISI		1-150 (100%)
+		CHLA		1-150 (90%)
+		ACMA		1-150 (100%)
+		ALRU		1-150 (100%)
+		ARME		1-150 (90%)
+		CHCH		1-150 (90%)
+		PREM		1-150 (20%)
+		UMCA		1-150 (100%)
+		ACCI		1-250 (50%)																<<modified from the prior version to mimic harvest damage to all shrub species.
+		COCO		1-250 (50%)
+		FRPU		1-250 (50%)
+		GASH		1-200 (50%)
+		HODI		1-30 (50%)
+		MANE		1-250 (50%)
+		RHMA		1-60 (50%)
+		RUSP		1-100 (50%)
+		VAOV		1-250 (50%)		
+		
+>>---- PRESCRIPTION_EXTENSIVE-YOUNG_AGG_LARGE ---------------------------------------
+Prescription    	Extensive_young_stand_thin_agg_large
+    StandRanking    Random																	
+	MinimumAge		30																		<<Min threshold not mentioned in Ch. 5 ESRF proposal
+	MaximumAge		50																		<<No trees originating before 1868 harvested																				
+	SiteSelection 	PatchCutting	30%		0.45		PatchSize							<<larger gap creation.
+    CohortsRemoved	SpeciesList
+		>>Species 	Selection
+		>>-------	---------
+		PSME		1-150 (100%)
+		TSHE		1-150 (100%)
+		THPL		1-150 (90%)																<<Lower removals from priority minor species + cherry (habitat value)
+		PISI		1-150 (100%)
+		CHLA		1-150 (90%)
+		ACMA		1-150 (100%)
+		ALRU		1-150 (100%)
+		ARME		1-150 (90%)
+		CHCH		1-150 (90%)
+		PREM		1-150 (20%)
+		UMCA		1-150 (100%)
+		ACCI		1-250 (50%)																<<modified from the prior version to mimic harvest damage to all shrub species.
+		COCO		1-250 (50%)
+		FRPU		1-250 (50%)
+		GASH		1-200 (50%)
+		HODI		1-30 (50%)
+		MANE		1-250 (50%)
+		RHMA		1-60 (50%)
+		RUSP		1-100 (50%)
+		VAOV		1-250 (50%)
+		
+>>---- PRESCRIPTION_EXTENSIVE-YOUNG_DISP ---------------------------------------
+Prescription    	Extensive_young_stand_thin_disp
+    StandRanking    Random																	
+	MinimumAge		30																		<<Min threshold not mentioned in Ch. 5 ESRF proposal
+	MaximumAge		50																		<<No trees originating before 1868 harvested
+	SiteSelection 	Complete																<<Even thinning from below, assuming there are relatively few age cohorts per cell by this stand age.		
+    CohortsRemoved	SpeciesList
+		>>Species 	Selection
+		>>-------	---------
+		PSME		1-50 (35%)																<<Thinning by % cohort removal, targeting more removal to PSME, TSHE, ALRU
+		TSHE		1-50 (35%)
+		THPL		1-50 (20%)
+		PISI		1-50 (20%)
+		CHLA		1-50 (20%)
+		ACMA		1-50 (20%)
+		ALRU		1-50 (35%)
+		ARME		1-50 (20%)
+		CHCH		1-50 (20%)
+		PREM		1-50 (20%)
+		UMCA		1-50 (20%)
+		
+		
+		
+>> ----------------------------------
+>> HARVESTING IMPLEMENTATION 
+>> ---------------------------------
+
+    HarvestImplementations
+>>	Mgmt Area	Prescription						Harvest Area	BeginTime	EndTime
+>> 	---------   ------------   						------------   	---------- 	--------
+	2		Extensive_young_stand_thin_agg_small			0.96%			10	    	31		<<Aim for ~approximately 50 % harvest of these young plantations in the first 20 years of the simulation. This is split between the four potential treatments, although stands could also be treated with multiple entries.							
+	2		Extensive_young_stand_thin_agg_mid			0.96%			10		31												
+	2		Extensive_young_stand_thin_agg_large			0.96%			10	    	31												
+	2		Extensive_young_stand_thin_disp				0.96%			10		31												
+	4		Extensive_young_stand_thin_agg_small			0.96%			10	    	31		<<As above							
+	4		Extensive_young_stand_thin_agg_mid			0.96%			10		31												
+	4		Extensive_young_stand_thin_agg_large			0.96%			10	    	31												
+	4		Extensive_young_stand_thin_disp				0.96%			10		31												
+	7		Intensive_thinning					0.64%			10														
+	7		Intensive_clearcut					0.64%			10													
+	8		Extensive_young_stand_thin_agg_small			0.04%			10				<<Aim for 1 % of total stands treated each year, divided between the four thinning treatments						
+	8		Extensive_young_stand_thin_agg_mid			0.04%			10														
+	8		Extensive_young_stand_thin_agg_large			0.04%			10														
+	8		Extensive_young_stand_thin_disp				0.04%			10  														
+	8		Extensive_regen_harv_high_rtn_agg			0.016%			10				<<Allocate much of the retention harvest area to the high retention treatment					
+	8		Extensive_regen_harv_mid_rtn_agg			0.016%			10														
+	8		Extensive_regen_harv_mid_rtn_disp			0.016%			10														
+	8		Extensive_regen_harv_low_rtn_agg			0.016%			10														
+	8		Extensive_regen_harv_low_rtn_disp			0.016%			10														
+	9		Intensive_thinning					0.64%			10						<<Updated from 4 % 29th Sept 2022
+	9		Intensive_clearcut					0.64%			10						<<Updated from 3.5% 29th Sept 2022
+	10		Extensive_young_stand_thin_agg_small			0.005%			10		20									
+	10		Extensive_young_stand_thin_agg_mid			0.005%			10		20												
+	10		Extensive_young_stand_thin_agg_large			0.005%			10		20												
+	10		Extensive_young_stand_thin_disp				0.005%			10  		20												
+	10		Extensive_regen_harv_high_rtn_agg			0.018%			10		20		<< trying to reduce large biomass removal in Triad-E during first 3 years	
+	10		Extensive_regen_harv_mid_rtn_agg			0.004%			10		20												
+	10		Extensive_regen_harv_mid_rtn_disp			0.004%			10		20												
+	10		Extensive_regen_harv_low_rtn_agg			0.004%			10		20												
+	10		Extensive_regen_harv_low_rtn_disp			0.004%			10		20
+	10		Extensive_young_stand_thin_agg_small			0.04%			20					<<Aim for 1 % of total stands treated each year, divided between the four thinning treatments						
+	10		Extensive_young_stand_thin_agg_mid			0.04%			20														
+	10		Extensive_young_stand_thin_agg_large			0.04%			20														
+	10		Extensive_young_stand_thin_disp				0.04%			20  														
+	10		Extensive_regen_harv_high_rtn_agg			0.144%			20				<<Allocate much of the retention harvest area to the high retention treatment					
+	10		Extensive_regen_harv_mid_rtn_agg			0.032%			20														
+	10		Extensive_regen_harv_mid_rtn_disp			0.032%			20														
+	10		Extensive_regen_harv_low_rtn_agg			0.032%			20														
+	10		Extensive_regen_harv_low_rtn_disp			0.032%			20
+
+
+	
+>> ------------
+>> OUTPUTS
+>> ----------
+
+PrescriptionMaps    harvest/biomass-harvest-prescripts-{timestep}.img
+BiomassMaps         harvest/biomass-removed-{timestep}.img
+EventLog            harvest/biomass-harvest-event-log.csv
+SummaryLog	    	harvest/biomass-harvest-summary-log.csv

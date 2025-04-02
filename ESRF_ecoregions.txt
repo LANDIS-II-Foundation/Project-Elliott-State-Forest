@@ -1,0 +1,9 @@
+LandisData  Ecoregions
+
+>>         	Map
+>> Active  	Code  	Name   		Description
+>> ------  	----  	-----  		-----------
+   no		0	inactive	"inactive cells"
+   yes		1   	ECOREGION_1   	"ECOREGION_1"
+   yes		2	ECOREGION_2	"ECOREGION_2"
+   yes		3	ECOREGION_3	"ECOREGION_3"

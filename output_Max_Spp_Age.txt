@@ -1,0 +1,17 @@
+LandisData  "Output Cohort Statistics"
+
+
+Timestep   14
+
+
+>>--------------------------------
+>> OUTPUT STATISTICS (Descriptive)
+>>--------------------------------
+
+SiteAgeStats
+MapNames   outputs/age-all-spp/AGE-{statistic}-{timestep}.img
+
+>>MED			<< median age across all species on site
+>>AVG			<< average age across all species on site
+MAX
+

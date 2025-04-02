@@ -1,0 +1,32 @@
+LandisData "Base Wind"			
+
+Timestep 1			
+
+>> Initially using the same values for all ecoregions.
+>> Values came from Table 1 and 1st paragraph of results section of Sinton et al 2000
+>>
+>>Ecoregion 	MaxSize  	MeanSize 	MinSize 	WindRotationPeriod
+>>--------------------------------------------------------------------				
+ECOREGION_1	157			8		1		3  		 
+ECOREGION_2	157			8 		1		3   		
+ECOREGION_3	157			8		1		4  		
+											
+
+
+
+>>These were derived in part from Figure S-3 in Harmon and Pabst 2019 in Forests
+WindSeverities				
+
+>>		Cohort Age		Mortality
+>>Severity 	% of longevity		Probability	
+>>-----------------------------------------------------				
+	5	0% to 20%		0.01
+	4	20% to 40%		0.024
+	3	40% to 60%		0.034
+	2	60% to 80%		0.0485
+	1	80% to 100%		0.0691
+
+
+
+MapNames wind/severity-{timestep}.img
+LogFile wind/log.csv

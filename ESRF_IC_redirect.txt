@@ -1,0 +1,4 @@
+LandisData	"Initial Communities"
+>> Initial communities file using inventory data
+
+CSV_File ESRF_IC_map_codes_2-8-2023.csv

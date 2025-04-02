@@ -1,0 +1,37 @@
+LandisData  Scenario
+
+Duration  		84
+
+Species   		ESRF_spp_life_hist_pars_final.txt
+
+Ecoregions     		ESRF_ecoregions.txt
+EcoregionsMap  		ESRF_ecoregions_zero_INT4S.tif
+
+CellLength  		30 
+
+
+>> Succession Extension     Initialization File
+>> --------------------     -------------------
+   "NECN Succession"		ESRF_lscape_NECN_v2.2_28.txt
+
+
+>> Disturbance Extensions   Initialization File
+>> ----------------------   -------------------
+    "Base Wind"		ESRF_WindBase_9-7-23.txt
+    "Biomass Harvest"		ESRF_biomass_harvest_2.5.24.txt
+    "SCRAPPLE"		        scrapple.txt
+
+>>   DisturbancesRandomOrder  yes  << optional parameter; default = no
+
+
+>> Other Extensions         	Initialization File
+>> ----------------         	-------------------
+      "Output Biomass"		ESRF_output_biomass.txt
+      "Output Biomass Community"	ESRF_biomass_community.txt
+>>    "Output Cohort Stats"    	cohort-stats.output.txt
+>>    "Output Reclass"	    	reclass.output.txt
+      "Output Cohort Statistics"	output_Max_Spp_Age.txt
+
+
+
+>> RandomNumberSeed  4,144  
